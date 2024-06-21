@@ -20,8 +20,7 @@
     <body class="{{ 'light' if current_user.theme == 'light' else 'dark' }}">
         <header>
             <h1>Task list</h1>
-            <div class="header-left">
-                
+            <div class="header-left">                
                 <div style=" margin-left: 8%;" class="theme-toggle" id="theme-toggle">😴</div>
                 <a  id="a-avatar" href="{{ url_for('user.Panel') }}"><img id="avatar" src="{{ current_user.avatar }}" alt="Profile picture"></a>
                 <a  style=" margin-left:89%; font-size:medium;" class="theme-toggle" href="{{ url_for('user.Panel') }}"> <b>{{ current_user.username }}</b>  </a>
