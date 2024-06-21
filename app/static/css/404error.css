@@ -1,5 +1,44 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700');
 @import url('https://fonts.googleapis.com/css?family=Catamaran:400,800');
+
+/* Mobile */
+@media (max-width: 600px) {
+  .error-container {
+      font-size: 80px;
+      margin: 50px 10px;
+  }
+
+  .zoom-area {
+      font-size: 16px;
+  }
+
+  .more-link {
+      font-size: 12px;
+      padding: 8px 12px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 992px) {
+  .error-container {
+      font-size: 90px;
+      margin: 60px 12px;
+  }
+
+  .zoom-area {
+      font-size: 17px;
+  }
+
+  .more-link {
+      font-size: 13px;
+      padding: 9px 14px;
+  }
+}
+
+
+
+
+
 .error-container {
   text-align: center;
   font-size: 106px;

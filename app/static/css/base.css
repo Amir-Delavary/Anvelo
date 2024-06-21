@@ -1,4 +1,62 @@
-                                                       /* مشترک */
+/* Mobile */
+@media (max-width: 600px) {
+    main {
+        padding: 60px 15px 15px;
+        min-height: 80vh;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        margin-top: 2%;
+    }
+
+    h2 {
+        font-size: 1.2em;
+        margin-top: 5%;
+    }
+
+    .form-control {
+        width: 90%;
+    }
+
+    .cancel, #btnsign {
+        width: 50%;
+    }
+
+    #left-pic, #right-pic {
+        display: none;
+    }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 992px) {
+    main {
+        padding: 70px 18px 18px;
+        min-height: 82vh;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    .form-control {
+        width: 80%;
+    }
+
+    .cancel, #btnsign {
+        width: 40%;
+    }
+
+    #left-pic, #right-pic {
+        width: 10%;
+    }
+}
+
+  
 body {
    
     background-color: #4a90e2;
