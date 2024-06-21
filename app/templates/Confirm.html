@@ -1,0 +1,39 @@
+{% extends 'Home.html' %}
+{% block content %}
+<h2>Email confirmation</h2>
+    {% if form.confirm.errors %}
+        {% for error in form.confirm.errors %}
+            <li class="alert alert-danger">{{ error }}</li>
+        {% endfor %}
+    {% endif %}
+    <form  style="margin-top:7% ;" action="{{url_for('user.ConfirmAccount')}}" method="post" novalidate>
+        
+        {{ form.hidden_tag()}}
+        {{form.confirm(placeholder="Enter the code that we send you !", class="form-control mb-4" )}}
+        
+        <div style=" margin-left: 35%;">
+            <button id="btnsign" class="form-control">Confirm Code</button>
+            <div style=" margin-left: 6px; padding-top:6px;cursor: pointer; color:black;" class="cancel" onclick="cancelAccount()">Cancel</div>
+        </div>
+    </form>
+
+<div class="timer" id="timer">10:00</div>
+<script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+
+<script>
+    function cancelAccount() {
+        fetch('{{ url_for("user.CancelAccount")}}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ form.csrf_token._value() }}' // This line ensures CSRF protection
+            }
+        }).then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            }
+        });
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "Home.html" %}
+{% block content %}
+<h2>Login</h2>
+
+    {% if form.email.errors %}
+        {% for error in form.email.errors %}
+            <li class="alert alert-danger">{{ error }}</li>
+        {% endfor %}
+    {% endif %}
+
+    {% if form.password.errors %}
+        {% for error in form.password.errors %}
+            <li class="alert alert-danger">{{ error }}</li>
+        {% endfor %}
+    {% endif %}
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages%}
+            {% for message in messages %}
+            <li class="alert alert-danger">{{message}}</li>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+ 
+    <form  action="{{url_for('auth.Login')}}" method="post" novalidate>
+        
+        {{ form.hidden_tag() }}
+        <input type="hidden" name="next" value="{{ request.args.get('next', '')}}">
+        {{form.email(placeholder="Enter email", class="form-control mb-3" )}}
+        {{form.password(placeholder="Enter password", class="form-control mb-4")}}
+        <div class="bot mb-3">{{form.recaptcha}}</div>
+
+        <div style=" margin-left: 35%;">
+        <button  id="btnsign" class="form-control">Log in</button>
+        <a style="margin-bottom:20px ;" href="http://localhost:5000/">
+            <div style="position: relative;margin-left: 6px; padding-top:6px;" class="cancel">cancel</div>
+        </a>
+    </form>
+    <br>
+    <br>  
+    <p>Need an account? </p> <a class="a-linklook" href="http://localhost:5000/signup">Register</a>
+
+{% endblock %}
+

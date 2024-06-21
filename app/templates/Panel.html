@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="avatar-container">
+            <input type="file" id="file-input" style="display:none;">
+            <img id="avatar" src="{{ current_user.avatar }}" alt="Profile picture">
+        </div>
+        <div class="user-name">User Name</div>
+    </header>
+    <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages%}
+                {% for message in messages %}
+                    <li>{{message}}</li>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="main-container">
+            <h1>Profile</h1>
+            <p><strong>Username:</strong> {{ current_user.username }}</p><!-- این جا باید اسم دریافت شود -->
+            <p><strong>Email:</strong> {{ current_user.email }}</p><!-- این جا باید ایمیل دریافت شود -->
+            <p><strong>Completed task :</strong> {{ current_user.tasks_done }}</p><!-- این جا باید تعداد کار های انجام شده دریافت شود -->
+            <a href="http://localhost:5000/panel/password" class="change-password-link">Change Password</a>
+            <div class="button-container">
+            
+                <form action="{{ url_for('auth.LogOut') }}" method="post">
+                    <button style="border: none; color: rgb(234, 0, 0)" class="cancel">Log out</button>
+                </form>
+                <form action="{{url_for('user.DeleteAccount')}}" method="post">
+                    <button style="border: none; color: rgb(234, 0, 0)" class="cancel">Delete Account</button>
+                </form>
+                
+            </div>
+            <a id="back-botton"  href="http://localhost:5000/">Back ></a>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='js/panel.js') }}"></script>
+</body>
+</html>
