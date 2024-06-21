@@ -28,7 +28,7 @@
             <p><strong>Username:</strong> {{ current_user.username }}</p><!-- این جا باید اسم دریافت شود -->
             <p><strong>Email:</strong> {{ current_user.email }}</p><!-- این جا باید ایمیل دریافت شود -->
             <p><strong>Completed task :</strong> {{ current_user.tasks_done }}</p><!-- این جا باید تعداد کار های انجام شده دریافت شود -->
-            <a href="http://localhost:5000/panel/password" class="change-password-link">Change Password</a>
+            <a href="{{ url_for('user.Password') }}" class="change-password-link">Change Password</a>
             <div class="button-container">
             
                 <form action="{{ url_for('auth.LogOut') }}" method="post">
@@ -39,7 +39,7 @@
                 </form>
                 
             </div>
-            <a id="back-botton"  href="http://localhost:5000/">Back ></a>
+            <a id="back-botton"  href="{{ url_for('main.Home') }}">Back ></a>
         </div>
     </main>
     <script src="{{ url_for('static', filename='js/panel.js') }}"></script>

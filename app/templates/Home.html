@@ -17,8 +17,8 @@
             <body class="{{ 'dark' if current_user.theme == 'dark' else 'light' }}">
                 <header>
                     <h1>Anvelo</h1>
-                    <a class="top-btn" href="{{ url_for('SignUp'),  _external=True }}"> SignUp </a> 
-                    <a style=" margin-left: 90%;" class="top-btn" href="{{ url_for('Login',  _external=True) }}"> Login </a>
+                    <a class="top-btn" href="{{ url_for('auth.SignUp') }}"> SignUp </a> 
+                    <a style=" margin-left: 90%;" class="top-btn" href="{{ url_for('auth.Login') }}"> Login </a>
                     <div class="header-left">
                         <div style=" margin-left: 3%;" class="theme-toggle">🟰</div>
                         <div style=" margin-left: 8%;" class="theme-toggle" id="theme-toggle">😴</div>
@@ -31,7 +31,7 @@
                       <div  class="container">
                         {% block content %}
                         <h2 id="get-start-h2" >Anvelo To Do list</h2>
-                        <a  href="http://localhost:5000/signup"><div id="get-start"> get start </div></a>
+                        <a  href="{{ url_for('auth.SignUp') }}"><div id="get-start"> get start </div></a>
                         {% endblock %}
                       </div>
                      

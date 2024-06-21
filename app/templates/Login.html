@@ -28,17 +28,16 @@
         <input type="hidden" name="next" value="{{ request.args.get('next', '')}}">
         {{form.email(placeholder="Enter email", class="form-control mb-3" )}}
         {{form.password(placeholder="Enter password", class="form-control mb-4")}}
-        <div class="bot mb-3">{{form.recaptcha}}</div>
 
         <div style=" margin-left: 35%;">
         <button  id="btnsign" class="form-control">Log in</button>
-        <a style="margin-bottom:20px ;" href="http://localhost:5000/">
+        <a style="margin-bottom:20px ;" href="{{ url_for('main.Home') }}">
             <div style="position: relative;margin-left: 6px; padding-top:6px;" class="cancel">cancel</div>
         </a>
     </form>
     <br>
     <br>  
-    <p>Need an account? </p> <a class="a-linklook" href="http://localhost:5000/signup">Register</a>
+    <p>Need an account? </p> <a class="a-linklook" href="{{ url_for('auth.SignUp') }}">Register</a>
 
 {% endblock %}
 
