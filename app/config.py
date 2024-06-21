@@ -19,6 +19,7 @@ class Config:
     MAIL_PASSWORD = 'nuwn zwwg znht aiei'
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
+    SERVER_NAME = 'https://anvelo.onrender.com'
 
 
 # app.config['SQLALCHEMY_BINDS'] = False
