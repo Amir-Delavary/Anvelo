@@ -19,8 +19,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-
 .avatar-container {
     position: absolute;
     top: 75px; /* Adjusted for smaller header */
@@ -81,7 +79,6 @@ main {
     
 }
 
-
 #back-botton {
     display: flex;
     margin-top: 50px;
@@ -89,10 +86,17 @@ main {
     ;
 }
 
-
-
-
-
+.alert{
+    display: fixed;
+    z-index: 1000;
+    margin: auto;
+    width: 30%;
+    margin-top: 10px;
+    padding: 5px;
+    list-style-type: none;
+    border-radius: 25px;
+    border: solid 2px rgb(216, 121, 121);
+}
 
 .cancel{
     
