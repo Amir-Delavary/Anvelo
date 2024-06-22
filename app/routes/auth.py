@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, request, url_for, flash, session, current_app
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.security import check_password_hash
 from flask_mail import Message
 from app.forms import SignUpForm, LoginForm
@@ -39,7 +39,7 @@ def SignUp():
             email = form.email.data
             password = form.password.data
             
-            existing_user = User.query.filter_by(username= username).first()  # Find first user with this id in Database
+            existing_user = User.query.filter_by(email= email).first()  # Find first user with this id in Database
             if existing_user:
                 flash("Error, User is exist")
                 return redirect(url_for('auth.SignUp'))
@@ -88,7 +88,7 @@ def Login():
 
 
 @auth_bp.route('/logout', methods=['POST', 'GET'])
-
+@login_required
 def LogOut():
     if request.method == 'POST':
         logout_user()  # LogOut user
