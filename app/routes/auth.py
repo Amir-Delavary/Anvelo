@@ -6,7 +6,6 @@ from app.forms import SignUpForm, LoginForm
 from app.extensions import db, mail
 from app.models import User
 from functools import wraps
-from uuid import uuid4
 import secrets
 from datetime import datetime, timedelta
 
@@ -39,9 +38,16 @@ def SignUp():
             email = form.email.data
             password = form.password.data
             
-            existing_user = User.query.filter_by(email= email).first()  # Find first user with this id in Database
-            if existing_user:
-                flash("Error, User is exist")
+            existing_email = User.query.filter_by(email= email).first()  # Find first user with this id in Database
+            existing_username = User.query.filter_by(username= username).first()  # Find first user with this id in Database
+            if existing_email and existing_username:
+                flash("Error, Username and email is exist")
+                return redirect(url_for('auth.SignUp'))
+            elif existing_username:
+                flash("Error, Username is exist")
+                return redirect(url_for('auth.SignUp'))
+            elif existing_email:
+                flash("Error, email is exist")
                 return redirect(url_for('auth.SignUp'))
             else:
                 token, expiration_time = generate_token()

@@ -124,3 +124,14 @@ a{
     padding: 6px;
 
 }
+.alert{
+    display: fixed;
+    z-index: 1000;
+    margin: auto;
+    width: 30%;
+    margin-top: 10px;
+    padding: 5px;
+    list-style-type: none;
+    border-radius: 25px;
+    border: solid 2px rgb(121, 216, 121);
+}

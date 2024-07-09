@@ -83,7 +83,7 @@ def mark_task_done(task_id):
         user = User.query.get(task.user_id)
         if user:
             user.tasks_done += 1  # Increment tasks_done for the user
-            db.session.delete(task)
+            task.done = True
             db.session.commit()
             return jsonify({"message": "Task marked as done and deleted successfully!"}), 200
         else:
@@ -98,5 +98,5 @@ def get_tasks():
     tasks = Task.query.filter_by(user_id=current_user.id).all()
     tasks_list = []
     for task in tasks:
-        tasks_list.append({"id": task.id, "title": task.title, "description": task.description, "deadline": task.deadline, "user_id": task.user_id})
+        tasks_list.append({"id": task.id, "title": task.title, "description": task.description, "deadline": task.deadline, "user_id": task.user_id, "done": task.done})
     return jsonify(tasks_list), 200

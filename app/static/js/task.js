@@ -35,23 +35,23 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(tasks => {
             tasks.forEach(task => {
-                const newTaskCard = createTaskCard(task.id, task.title, task.description, task.deadline, task.user_id, true);
+                const newTaskCard = createTaskCard(task.id, task.title, task.description, task.deadline, task.user_id, task.done, true);
                 taskBoard.insertBefore(newTaskCard, addTaskCard);
             });
         });
 
     addTaskCard.addEventListener("click", () => {
         const today = new Date().toISOString().split('T')[0];
-        const newTaskCard = createTaskCard(null, "", "", today, currentUserId, false); // Replace 1 with appropriate user_id
+        const newTaskCard = createTaskCard(null, "", "", today, currentUserId, false, false); // Replace 1 with appropriate user_id
         taskBoard.insertBefore(newTaskCard, addTaskCard);
     });
 
-    function createTaskCard(taskId, title, description, deadline, user_id, isSaved) {
+    function createTaskCard(taskId, title, description, deadline, user_id, done,isSaved) {
         const newTaskCard = document.createElement("div");
         newTaskCard.classList.add("task-card");
         newTaskCard.setAttribute("data-task-id", taskId); // Store taskId in the element
         newTaskCard.innerHTML = `
-            <div class="task-title">Title: <input type="text" placeholder="Enter title" class="editable" value="${title}" ${isSaved ? 'readonly' : ''}></div>
+            <div class="task-title">Title: <input type="text" placeholder="Enter title" class="editable" value="${title}" ${isSaved ? 'readonly' : ''} required></div>
             <div class="task-content">Description: <textarea placeholder="Enter description" class="editable" rows="2" ${isSaved ? 'readonly' : ''}>${description}</textarea></div>
             <input type="date" class="task-deadline" value="${deadline}" ${isSaved ? 'readonly' : ''}>
             <div class="task-actions">
@@ -71,10 +71,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
         titleEditable.focus();
 
+        if (done) {
+            deleteIcon.style.display = "none";
+            checkIcon.style.display = "none";
+            editIcon.style.display = "none";
+            const doneMessage = document.createElement("div");
+            doneMessage.textContent = "Done!";
+            doneMessage.classList.add("done-message");
+            newTaskCard.querySelector(".task-actions").appendChild(doneMessage);
+        }
+
+        
         saveIcon.addEventListener("click", () => {
             const title = titleEditable.value;
             const description = descEditable.value;
             const deadline = newTaskCard.querySelector(".task-deadline").value;
+
+            if (!title.trim()) {
+                alert("Title cannot be Empty!");
+                return;
+            }
+
 
             const taskData = { title, description, deadline, user_id };
 
@@ -144,10 +161,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 }).then(response => response.json())
                   .then(data => {
                       console.log(data); // Log server response
-                      newTaskCard.remove();
+                      deleteIcon.style.display = "none";
+                      checkIcon.style.display = "none";
+                      editIcon.style.display = "none";
+                      const doneMessage = document.createElement("div");
+                      doneMessage.textContent = "Done";
+                      doneMessage.classList.add("done-message");
+                      newTaskCard.querySelector(".task-actions").appendChild(doneMessage);
                   });
             } else {
-                newTaskCard.remove();
+                deleteIcon.style.display = "none";
+                checkIcon.style.display = "none";
+                editIcon.style.display = "none";
+                const doneMessage = document.createElement("div");
+                doneMessage.textContent = "Done";
+                doneMessage.classList.add("done-message");
+                newTaskCard.querySelector(".task-actions").appendChild(doneMessage);
             }
         });
 

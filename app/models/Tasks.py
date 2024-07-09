@@ -10,3 +10,4 @@ class Task(db.Model):
     description = db.Column(db.Text, nullable=False)
     deadline = db.Column(db.String(10), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    done = db.Column(db.Boolean(), default = False)
